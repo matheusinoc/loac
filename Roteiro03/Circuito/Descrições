@@ -1,0 +1,59 @@
+Descrição principal do circuito:
+
+- Da esquerda pra direita do circuito, vemos logo no ínicio que as entradas A e B estão conectadas a uma porta AND, uma porta OR, uma operação de soma e uma de substração. São todas as operações que podem ser feitas nesta ULA. Essas operações estão conectadas a um mux 4:1 cuja saída é definida dependendo da operação escolhida como o seletor F;
+
+- Pelos circuito as vários comparadores que vão verificar se as entradas são positivas (>0) ou negativas (<0);
+
+- Também há 4 portas AND que são usadas para verificar os sinais das entradas e saída e ver se atingem todas as condições propostas no código. Essas portas estão conectadas a 2 portas OR que vão ajudar a verificar se FLAG_O será true ou false;
+
+- Essas portas OR estão conectadas a outro mux 4:1 cuja a saída indicará se irá ocorrer um overflow/underflow. Esse mux possui 4 entradas. O seletor desse mux é o mesmo seletor do outro mux. As duas primeiras entradas desse mux são 0 e indicam as operações AND e OR que não ativam o FLAG_O. Já a as duas últimas são as operações de adição e subtração que dependendo se certas condições forem atingidas fazerão FLAG_O ser true indincando um overflow/underflow.
+
+-----
+
+Descrição dos seguintes casos:
+
+a) A = 11 e B = 12;
+AND:
+00001011 = 11
+00001100 = 12
+00001000 = 8 (A and B)
+a porta AND pega cada bit e gera um resultado com a porta lógica AND
+
+OR:
+00001011 = 11
+00001100 = 12
+00001111 = 15 (A or B)
+gera um resultado com a porta lógica OR
+
+Soma:
+Realizou a soma das entradas em binário e em decimal normalmente. Sem overflow/underflow.
+
+Subtração:
+Realizou a subtração das entradas em binário e em decimal normalmente. Sem overflow/underflow. Para não ficar muito
+repetitivo eu vou descrever mais os próximos casos quando houver algo chamativo.
+
+b) A = -10 e B = 12;
+AND:
+ok
+
+OR:
+ok
+
+Soma:
+ok
+
+Subtração:
+ok
+
+c) A = 127 e B = 2.
+AND:
+ok
+
+OR:
+ok
+
+Soma:
+Aqui ocorreu um overflow. A soma de 127 e 2 em binário é 10000001. Esse número em decimal é 129, porém como estamos lidando com uma saída sinalizada, então temos que usar o complemento de 2, o que faz esse número ser -127. O número máximo da saída é de 127, portanto ocorreu um overflow. 2 números positivos geraram uma saída negativa.
+
+Subtração:
+ok :)
