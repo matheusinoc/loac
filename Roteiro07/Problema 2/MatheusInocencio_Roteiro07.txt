@@ -1,0 +1,5 @@
+﻿lui x5, 0x10000
+addi x5, x5, 0x00C
+li x6, 0xFE
+sw x6, 0(x5)
+lw x10, 0(x5)
