@@ -1,0 +1,45 @@
+﻿Código com comentários resumidos:
+
+main:
+	li a0, 5 # a0 = valor fatorado / resultado;
+	li a1, 1 # a1 = 1;
+    add a2, x0, a0 # a2 = índice principal (i);
+loop:
+	beq a2, a1, fim # while (a2 != 1) {
+    add a3, x0, a2 # a3 = índice secundário (j);
+    li a4, 0 # a4 = soma feita em multiplicacao;
+multiplicacao:
+	beq a3, a1, loop2 # while (a3 != 1) {
+	add a4, a4, a0 # a4 += a0;
+    sub a3, a3, a1 # a3--;
+    j multiplicacao # }
+loop2:
+	sub a2, a2, a1 # a2--
+    add a0, x0, a4 # a0 = a4 = a0 + a0 + ... = a0 x a2
+    # a2 vai diminuindo enquando a0 chega próximo de seu resultado
+    j loop # }
+fim:
+	nop # a0 se torna o resultado e programa encerra
+
+
+Código com comentários detalhados:
+
+main:
+	li a0, 5 # é em a0 onde colocamos o valor a ser fatorado e também é nele onde sairá o resultado
+	li a1, 1 # só guarda o valor 1 (a1 = 1)
+    add a2, x0, a0 # servirá como um índice principal (a2 é como se fosse um i)
+loop:
+	beq a2, a1, fim # se índice for igual a 1 o programa vai para o fim (while (a2 != 1) {... )
+    add a3, x0, a2 # é um índice secundário que auxilia na multiplicação (a3 é como um j)
+    li a4, 0 # é um valor auxiliar que guarda as somas feitas na multiplicação
+multiplicacao: # é como se fosse um loop dentro de um loop
+	beq a3, a1, loop2 # se índice secundário for igual a 1, ele vai para para a continuação do loop (while (a3 != 1))
+	add a4, a4, a0 # enquanto índice não for 1, a4 vai ser somado pelo valor que está em a0 (a4 += a0)
+    sub a3, a3, a1 # o valor do índice é subtraído até em um momento chegar a 1 (a3--)
+    j multiplicacao # volta para a multiplicação
+loop2: # continuação do loop
+	sub a2, a2, a1 # o índice principal vai ser subtraído (a2--)
+    add a0, x0, a4 # a0 agora guarda a4 que é o resultado da multiplicação atual (ex: a0 = a4 = 5 + 5 + 5 + 5 = 20)
+    j loop # o programa volta para o loop até o índice principal ser 1; a0 será usado para multiplicar (ex: a0 = 5; a0 = a0x4; a0 = a0x3 ...)
+fim:
+	nop # o programa se encerra
